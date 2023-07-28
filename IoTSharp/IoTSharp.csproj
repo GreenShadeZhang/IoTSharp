@@ -37,7 +37,7 @@
 		<DocumentationFile>IoTSharp.xml</DocumentationFile>
 		<NoWarn>1701;1702;1591</NoWarn>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-		<Configurations>Debug;Release;</Configurations>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Debug' OR '$(Configuration)' == 'Release'">
@@ -47,6 +47,19 @@
 		<!-- Set this to true if you enable server-side prerendering -->
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
 	</PropertyGroup>
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'MySql' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Oracle' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'PostgreSql' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Production' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'TimescaleDB' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Sqlite' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Cassandra' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'ClickHouse' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'InMemory' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'SQLServer' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Taos' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'InfluxDB' " />
 	<ItemGroup>
 
 		<PackageReference Include="AspNetCore.HealthChecks.System" Version="7.0.0-rc2.6" />
@@ -108,7 +121,7 @@
 		<!-- Include the newly-built files in the publish output -->
 		<ItemGroup>
 			<DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
-			<ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+			<ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
 				<RelativePath>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
 				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 				<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
