@@ -11,7 +11,7 @@
         >
           <el-row :gutter="35">
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-              <el-form-item label="设备名称" prop="name">
+              <el-form-item label="设备名称11999" prop="name">
                 <el-input
                   v-model="state.dataForm.name"
                   placeholder="请输入设备名称"

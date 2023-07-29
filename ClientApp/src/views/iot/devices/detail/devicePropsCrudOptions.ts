@@ -84,6 +84,7 @@ export const createDevicePropsCrudOptions = function ({ expose }, deviceId, stat
 						show: true, //是否显示此按钮
 						type: 'primary',
 						click() {
+							console.log("login")
 							state.currentPageState = 'editprop';
 						}, //点击事件，默认打开添加对话框
 					},

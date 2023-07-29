@@ -99,7 +99,7 @@ namespace IoTSharp.Controllers
                     icon = "anticon-database",
                     children = new MenuItem[]
                         {
-                            new() { text = "雷达设备", i18n = "", vi18n="iot.devicelist", routename="devicelist", link = "/iot/devices/devicelist" , vpath="/iot/devices/devicelist",}
+                            new() { text = "雷达设备", i18n = "", vi18n="iot.radardevicelist", routename="radardevicelist", link = "/iot/devices/radardevicelist" , vpath="/iot/devices/radardevicelist",}
                         }
                 });
                 _user_menu.Add(

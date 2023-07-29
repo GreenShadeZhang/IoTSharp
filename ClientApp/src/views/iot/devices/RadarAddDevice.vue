@@ -5,7 +5,7 @@
         <el-form :model="dataForm" size="default" label-width="90px">
           <el-row :gutter="35">
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
-              <el-form-item label="设备名称1133">
+              <el-form-item label="设备名称">
                 <el-input
                   v-model="dataForm.name"
                   placeholder="请输入设备名称"
@@ -23,6 +23,24 @@
                     :value="item"
                   />
                 </el-select>
+              </el-form-item>
+            </el-col>
+             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
+              <el-form-item label="设备UID">
+                <el-input
+                  v-model="dataForm.uid"
+                  placeholder="请输入设备UID"
+                  clearable
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
+              <el-form-item label="设备备注">
+                <el-input
+                  v-model="dataForm.desc"
+                  placeholder="请输入设备备注"
+                  clearable
+                ></el-input>
               </el-form-item>
             </el-col>
             <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24" class="mb20">
@@ -78,7 +96,7 @@ interface deviceform {
 }
 
 export default defineComponent({
-  name: "addDevice",
+  name: "radarAddDevice",
   components: {},
   setup(props) {
     const state = reactive<deviceform>({
@@ -89,6 +107,8 @@ export default defineComponent({
       dataForm: {
         id: '0000000-0000-0000-0000-000000000000',
         name: '',
+        uid:'',
+        desc:'',
         timeout: 300,
         identityType: '',
         deviceType: '',
@@ -100,6 +120,8 @@ export default defineComponent({
         state.dataForm={
         id: '0000000-0000-0000-0000-000000000000',
         name: '',
+        uid:'',
+        desc:'',
         timeout: 300,
         identityType: '',
         deviceType: '',

@@ -78,6 +78,18 @@ export const createDeviceCrudOptions = function ({ expose }, customerId, deviceD
 				delRequest,
 			},
 
+			actionbar: {
+				buttons: {
+					add: {
+						show: true,
+						// click() {
+						// 	console.log("addd")
+						// 	//sstate.currentPageState = 'editprop';
+						// }, //点
+					}
+				},
+			},
+
 			// search: {
 			// 	...FsButton,
 			// 	show: true,
@@ -139,7 +151,23 @@ export const createDeviceCrudOptions = function ({ expose }, customerId, deviceD
 					},
 				},
 				name: {
-					title: '设备名称',
+					title: '设备名称1222',
+					type: 'button',
+					search: { show: true },
+					column: {
+						component: {
+							...FsButton,
+							type: 'primary',
+							on: {
+								onClick({ row }) {
+									deviceDetailRef.value.openDialog(row);
+								},
+							},
+						},
+					},
+				},
+				uid: {
+					title: '设备UID',
 					type: 'button',
 					search: { show: true },
 					column: {
@@ -155,7 +183,7 @@ export const createDeviceCrudOptions = function ({ expose }, customerId, deviceD
 					},
 				},
 				deviceType: {
-					title: '设备类型',
+					title: '设备类型44343',
 					type: 'dict-select',
 					search: { show: false },
 					dict: dict({
@@ -169,7 +197,7 @@ export const createDeviceCrudOptions = function ({ expose }, customerId, deviceD
 				},
 
 				active: {
-					title: '活动状态',
+					title: '活动状态4343',
 					type: 'dict-switch',
 					search: { show: true },
 					dict: dict({
@@ -248,7 +276,7 @@ export const createDeviceCrudOptions = function ({ expose }, customerId, deviceD
 					column: {
 						show: false,
 					},
-					title: '超时',
+					title: '超时434',
 					form: {
 						value: 300,
 					},

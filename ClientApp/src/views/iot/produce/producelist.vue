@@ -257,6 +257,7 @@ const editdict = (row: TableDataRow) => {
   producedatadictionaryformRef.value.openDialog(row.id);
 };
 const creatdevice = (row: TableDataRow) => {
+  Console.log("create device")
   deviceformRef.value.openDialog(row.id);
 };
 const navtodevice = (row: TableDataRow) => {
