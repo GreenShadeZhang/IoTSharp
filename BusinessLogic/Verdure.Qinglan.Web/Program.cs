@@ -1,4 +1,5 @@
 ﻿using Verdure.Qinglan;
+using Verdure.Qinglan.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +10,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ApiTokenFilter>();
+
+builder.Services.Configure<QinglanAccountOptions>(
+    builder.Configuration.GetSection("QinglanAccount"));
+
 builder.Services.AddHttpApi<IQinglanApi>(o =>
 {
-    o.GlobalFilters.Add(new ApiTokenFilter());
+    o.GlobalFilters.Add(builder.Services.BuildServiceProvider().GetRequiredService<ApiTokenFilter>());
 });
 
 var app = builder.Build();

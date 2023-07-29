@@ -15,6 +15,15 @@ namespace Verdure.Qinglan.Models
 		public int Code { get; set; }
 
         public T? Data { get; set; }
+
+        public static Result<T> FromData(T data)
+        {
+			return new Result<T>()
+            {
+				Code = 0,
+				Data = data
+            };
+        }
     }
 }
 
