@@ -35,6 +35,7 @@ using IoTSharp.Data.Extensions;
 using Quartz;
 using IoTSharp.Services;
 using Quartz.AspNetCore;
+using Verdure.Qinglan;
 
 namespace IoTSharp
 {
@@ -276,7 +277,15 @@ namespace IoTSharp
             services.AddTransient<PublishAlarmDataTask>();
             services.AddTransient<RawDataGateway>();
             services.AddTransient<KepServerEx>();
-            
+
+            services.Configure<QinglanAccountOptions>(
+                Configuration.GetSection("QinglanAccount"));
+
+            services.AddHttpClient();
+            services.AddHttpApi<IQinglanTokenApi>();
+            services.AddHttpApi<IQinglanApi>();
+            services.AddTokenProvider<IQinglanApi, QinglanCustomTokenProvider>();
+
         }
 
       

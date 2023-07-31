@@ -111,11 +111,19 @@ namespace IoTSharp
         public static Tenant GetTenant(this ApplicationDbContext context, Guid tenId)
            => context.Tenant.FirstOrDefault(c => c.Id == tenId);
 
-       /// <summary>
-       /// 获取当前用户的邮箱
-       /// </summary>
-       /// <param name="_user"></param>
-       /// <returns></returns>
+      /// <summary>
+      /// 获取清澜token
+      /// </summary>
+      /// <param name="context"></param>
+      /// <returns></returns>
+      public static QinglanToken GetQinglanToken(this ApplicationDbContext context)
+          => context.QinglanTokens.OrderByDescending(q=>q.CreateDate).FirstOrDefault();
+
+        /// <summary>
+        /// 获取当前用户的邮箱
+        /// </summary>
+        /// <param name="_user"></param>
+        /// <returns></returns>
         public static string GetEmail(this ClaimsPrincipal _user) => _user.FindFirstValue(ClaimTypes.Email);
         /// <summary>
         /// 获取当前用户的ID

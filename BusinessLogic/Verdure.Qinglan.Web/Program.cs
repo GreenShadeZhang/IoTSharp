@@ -10,15 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ApiTokenFilter>();
-
 builder.Services.Configure<QinglanAccountOptions>(
     builder.Configuration.GetSection("QinglanAccount"));
 
-builder.Services.AddHttpApi<IQinglanApi>(o =>
-{
-    o.GlobalFilters.Add(builder.Services.BuildServiceProvider().GetRequiredService<ApiTokenFilter>());
-});
+
+builder.Services.AddHttpApi<IQinglanTokenApi>();
+builder.Services.AddHttpApi<IQinglanApi>();
+builder.Services.AddTokenProvider<IQinglanApi, CustomTokenProvider>();
 
 var app = builder.Build();
 

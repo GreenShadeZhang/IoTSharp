@@ -10,7 +10,7 @@ public interface IQinglanApi : IHttpApi
     [HttpPost("prod-api/login")]
     Task<Result<QinglanTokenModel>> LoginAsync([JsonContent] LoginInput input);
 
-    //[OAuthToken]
+    [OAuthToken]
     [HttpPost("prod-api/thirdparty/population")]
     Task<object> GetPopulationAsync([JsonContent] List<string> uids);
 

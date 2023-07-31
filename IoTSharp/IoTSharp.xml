@@ -691,6 +691,238 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="T:IoTSharp.Controllers.QinlanDevicesController">
+            <summary>
+            设备管理
+            </summary>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetAllDevices(System.Guid)">
+            <summary>
+            获取指定客户的设备列表
+            </summary>
+            <param name="customerId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetDevices(IoTSharp.Controllers.Models.DeviceParam)">
+            <summary>
+            获取指定客户的设备列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetIdentity(System.Guid)">
+            <summary>
+            获取指定设备的认证方式信息
+            </summary>
+            <param name="deviceId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.CreateX509Identity(System.Guid)">
+            <summary>
+            获取指定设备的认证方式信息
+            </summary>
+            <param name="deviceId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.DownloadCertificates(System.Guid)">
+            <summary>
+            下载证书
+            </summary>
+            <param name="deviceId"></param>
+            <returns>一个压缩包，包含ca.crt client.crt client.key</returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetAttributeLatest(System.Guid)">
+             <summary>
+            获取指定设备的最新属性
+             </summary>
+             <param name="deviceId"></param>
+             <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetAttributeLatestByKeyNameAndDeviceId(IoTSharp.Dtos.AttributeLatestByKeyNameAndDeviceIdDto)">
+             <summary>
+            获取指定Key和设备Id列表的最新属性
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetAttributeLatest(System.Guid,System.String)">
+            <summary>
+            获取指定设备指定keys的最新属性
+            </summary>
+            <param name="deviceId">Which device do you read?</param>
+            <param name="keys">Specify key name list , use , or space or  ; to split </param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetTelemetryLatest(System.Guid)">
+             <summary>
+            获取指定设备的最新遥测数据
+             </summary>
+             <param name="deviceId"></param>
+             <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetTelemetryLatest(System.Guid,System.String)">
+            <summary>
+            获取指定设备的指定key 的遥测数据
+            </summary>
+            <param name="deviceId">Which device do you read?</param>
+            <param name="keys">指定键值列表， 使用分号或者逗号分割 。 </param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetTelemetryData(System.Guid,System.String,System.DateTime)">
+            <summary>
+            获取指定设备和指定时间， 指定key的数据
+            </summary>
+            <param name="deviceId">Which device do you read?</param>
+            <param name="keys">Specify key name list , use , or space or  ; to split </param>
+            <param name="begin">开始以时间， 比如 2019-06-06 12:24</param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetTelemetryData(System.Guid,System.String,System.DateTime,System.DateTime)">
+            <summary>
+            返回指定设备的的遥测数据， 按照keyname 和指定时间范围获取，如果keyname 为 all  , 则返回全部key 的数据
+            </summary>
+            <param name="deviceId">Which device do you read?</param>
+            <param name="keys">Specify key name list , use , or space or  ; to split </param>
+            <param name="begin">For example: 2019-06-06 12:24</param>
+            <param name="end">For example: 2019-06-06 12:24</param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetTelemetryData(System.Guid,IoTSharp.Dtos.TelemetryDataQueryDto)">
+             <summary>
+             返回指定设备的的遥测数据， 按照keyname 和指定时间范围获取，如果keyname 为 all  , 则返回全部key 的数据
+             </summary>
+             <param name="deviceId">指定设备ID</param>
+             <param name="queryDto">查询条件例子:
+            {
+             "keys": "",
+             "begin": "2022-03-23T11:44:56.488Z",
+             "every": "1.03:14:56:166",
+             "aggregate": "Mean"
+             }
+             </param>
+             <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetDevice(System.Guid)">
+            <summary>
+            获取设备详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.PutDevice(System.Guid,IoTSharp.Dtos.DevicePutDto)">
+            <summary>
+            修改设备
+            </summary>
+            <param name="id"></param>
+            <param name="device"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.PostDevice(IoTSharp.Dtos.DevicePostDto)">
+            <summary>
+            创建设备， 客户ID和租户ID均为当前登录用户所属
+            </summary>
+            <param name="device"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.DeleteDevice(System.Guid)">
+            <summary>
+            删除设备
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.Rpc(System.String,System.String,System.Int32,System.Object)">
+            <summary>
+            远程控制指定设备， 此方法通过给远程设备发送mqtt消息进行控制，设备在收到信息后回复结果，此方法才算调用结束
+            </summary>
+            <param name="access_token"></param>
+            <param name="method"></param>
+            <param name="timeout"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.Telemetry(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            HTTP方式上传遥测数据
+            </summary>
+            <param name="access_token">Device 's access token</param>
+            <param name="telemetrys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.Attributes(System.String,IoTSharp.Contracts.DataSide,System.String)">
+             <summary>
+             获取服务侧的设备属性
+             </summary>
+             <param name="access_token">Device 's access token </param>
+            <param name="dataSide">Specifying data side.</param>
+            <param name="keys">Specifying Attribute's keys</param>
+             <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.Attributes(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            上传客户侧属性数据
+            </summary>
+            <param name="access_token">Device 's access token </param>
+            <param name="attributes">attributes</param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.Alarm(System.String,IoTSharp.Contracts.DeviceAlarmDto)">
+            <summary>
+            为网关的子设备或者普通设备上传告警信息
+            </summary>
+            <param name="access_token">token</param>
+            <param name="alarm">警告内容</param>
+            <returns></returns>
+            <remarks>如果是网关设备，当OriginatorName为网关的名称或者ID时，则我们认为他是网关本身的警告，否则我们认为是设备的警告</remarks>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.PushDataToMap(System.String,System.String)">
+            <summary>
+            Http方式调用RawDataGateway网关上传原始Json或者xml并通过规则链进行解析。
+            </summary>
+            <param name="access_token">Device 's access token </param>
+            <param name="format"></param>
+            <returns></returns>
+            <remarks>需要在body里面填充数据</remarks>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.PushDataToRuleChains(System.String,System.String)">
+            <summary>
+            上传原始Json或者xml 通过规则链进行解析。
+            </summary>
+            <param name="access_token">Device 's access token </param>
+            <param name="format">只支持json和 xml， XML会转换为 Json。</param>
+            <returns></returns>
+            <remarks>需要在body里面填充数据</remarks>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.AddAttribute(System.String,IoTSharp.Controllers.DeviceAttributeDto)">
+            <summary>
+            服务侧新增属性
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.EditAttribute(System.Guid,IoTSharp.Dtos.DeviceAttrEditDto)">
+            <summary>
+            服务侧和任意侧属性修改
+            </summary>
+            <param name="devid"></param>
+            <param name="attributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.RemoveAttribute(IoTSharp.Dtos.RemoveDeviceAttributeInput)">
+            <summary>
+            属性删除
+            </summary>
+            <param name="input">要删除的属性。</param>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetSessionStatus">
+            <summary>
+            SessionStatus
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanDevicesController.GetClientStatus">
+            <summary>
+            SessionStatus
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:IoTSharp.Controllers.RulesController.UpdateFlowExpression(IoTSharp.Dtos.UpdateFlowExpression)">
              <summary>
              更新节点的条件表达式
@@ -1346,6 +1578,13 @@
             </summary>
             <param name="context"></param>
             <param name="tenId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.IoTSharpExtension.GetQinglanToken(IoTSharp.Data.ApplicationDbContext)">
+            <summary>
+            获取清澜token
+            </summary>
+            <param name="context"></param>
             <returns></returns>
         </member>
         <member name="M:IoTSharp.IoTSharpExtension.GetEmail(System.Security.Claims.ClaimsPrincipal)">
