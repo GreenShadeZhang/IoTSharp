@@ -124,56 +124,46 @@ namespace IoTSharp.Controllers
         {
             var profile = this.GetUserProfile();
 
-            var population = await _qinglanApi.GetPopulationAsync(new List<string>(){ "CB262728F796DDB" });
+           
             m.Limit = m.Limit < 5 ? 5 : m.Limit;
             try
             {
-            
-                var query=from  c in _context.Device.Include(c => c.DeviceIdentity) where c.Customer.Id == m.customerId && !c.Deleted && c.Tenant.Id == profile.Tenant select c;
-                if (m.OnlyActive)
+                var list = new List<DeviceDetailDto>();
+
+                var deviceList = await _qinglanApi.GetRadarDeviceListAsync(m.Offset, m.Limit,string.Empty);
+
+                if (deviceList.Code == 200)
                 {
-                    var al = from a in _context.AttributeLatest where   a.KeyName == Constants._Active &&a.Value_Boolean==true   select a.DeviceId;
-                    query = from x in query where al.Contains( x.Id)   select x;
-                }
-                if (!string.IsNullOrEmpty(m.Name))
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(m.Name, @"(?im)^[{(]?[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]?$"))
+                    foreach (var device in deviceList.Rows)
                     {
-                        var id = Guid.Parse(m.Name);
-                        query = from  x in query  where   x.Id == id select x ;
+                        var radar = new DeviceDetailDto()
+                        {
+                            Name = device.EqtName,
+                            EqtId = device.EqtId,
+                            Uid = device.Uid,
+                            DeptId = device.DeptId
+                        };
+                        list.Add(radar);
                     }
-                    else
+
+                    return new ApiResult<PagedData<DeviceDetailDto>>(ApiCode.Success, "OK", new PagedData<DeviceDetailDto>
                     {
-                        query = from x in query where x.Name.Contains(m.Name) select x;
-                    }
+                        total = deviceList.Total,
+                        rows = list
+                    });
                 }
-                var lst = await query.Skip((m.Offset) * m.Limit).Take(m.Limit).Select(x => new DeviceDetailDto()
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    IdentityId = x.DeviceIdentity.IdentityId,
-                    IdentityValue = x.DeviceIdentity.IdentityType == IdentityType.X509Certificate ? "" : x.DeviceIdentity.IdentityValue,
-                    DeviceType = x.DeviceType,
-                    Owner = x.Owner,
-                    TenantId=x.Tenant.Id,
-                    TenantName=x.Tenant.Name,
-                    CustomerId=x.Customer.Id,
-                    CustomerName=x.Customer.Name,
-                    Timeout = x.Timeout,
-                    IdentityType = x.DeviceIdentity.IdentityType
-                }).ToListAsync();
-                await QueryActivityInfo(lst);
-                return new ApiResult<PagedData<DeviceDetailDto>>(ApiCode.Success, "OK", new PagedData<DeviceDetailDto>
-                {
-                    total = await query.CountAsync(),
-                    rows = lst
-                });
+             
             }
             catch (Exception e)
             {
                 return new ApiResult<PagedData<DeviceDetailDto>>(ApiCode.Exception, e.Message, null);
             }
 
+            return new ApiResult<PagedData<DeviceDetailDto>>(ApiCode.Success, "OK", new PagedData<DeviceDetailDto>
+            {
+                total = 0,
+                rows = new List<DeviceDetailDto>()
+            });
         }
         private async Task QueryActivityInfo(DeviceDetailDto dev)
         {

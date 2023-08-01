@@ -14,7 +14,7 @@ import request from '/@/utils/request';
 export function deviceApi() {
 	return {
 		devcieList: (params: QueryParam) => {
-			var url = '/api/Devices/Customers?offset=' + params.offset + '&limit=' + params.limit + '&sorter=&customerId=' + params.customerId + '&sort=';
+			var url = '/api/QinlanDevices/Customers?offset=' + params.offset + '&limit=' + params.limit + '&sorter=&customerId=' + params.customerId + '&sort=';
 			if (params.name) {
 				url += '&name=' + params.name;
 			}

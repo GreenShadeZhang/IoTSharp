@@ -283,7 +283,7 @@ namespace IoTSharp
 
             services.AddHttpClient();
             services.AddHttpApi<IQinglanTokenApi>();
-            services.AddHttpApi<IQinglanApi>();
+            services.AddHttpApi<IQinglanApi>().AddOAuthTokenHandler();
             services.AddTokenProvider<IQinglanApi, QinglanCustomTokenProvider>();
 
         }

@@ -46,5 +46,9 @@ namespace IoTSharp.Dtos
         public string CustomerName { get;  set; }
         public Guid TenantId { get;  set; }
         public Guid CustomerId { get;  set; }
+
+        public int EqtId { get; set; }
+        public string Uid { get; set; }
+        public int DeptId { get; set; }
     }
 }

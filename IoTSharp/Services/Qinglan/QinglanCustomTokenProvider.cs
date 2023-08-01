@@ -2,12 +2,14 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Core;
 using IoTSharp.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Verdure.Qinglan;
+using Verdure.Qinglan.Models;
 using WebApiClientCore.Extensions.OAuths;
 using WebApiClientCore.Extensions.OAuths.TokenProviders;
 
@@ -48,12 +50,22 @@ namespace IoTSharp.Services
 
                 if (deptTree.StatusCode == HttpStatusCode.OK)
                 {
-                    return new TokenResult
+                    var resultString = await deptTree.Content.ReadAsStringAsync();
+
+                    var jsonOptions = new JsonSerializerOptions
                     {
-                        Access_token = qinglanToken.AccessToken,
-                        Refresh_token = qinglanToken.RefreshToken,
-                        Expires_in = qinglanToken.ExpiresIn
+                        PropertyNameCaseInsensitive = true
                     };
+                    var result = JsonSerializer.Deserialize<Result<object>>(resultString, jsonOptions);
+                    if (result.Code == 200)
+                    {
+                        return new TokenResult
+                        {
+                            Access_token = qinglanToken.AccessToken,
+                            Refresh_token = qinglanToken.RefreshToken,
+                            Expires_in = qinglanToken.ExpiresIn
+                        };
+                    }
                 }
 
                 var token = await tokenApi.LoginAsync(input);
@@ -67,7 +79,7 @@ namespace IoTSharp.Services
                     qinglanToken.Scope = token.Data.scope;
                     qinglanToken.ExpiresIn = token.Data.expires_in;
                     qinglanToken.TokenType = token.Data.token_type;
-                
+
                     _context.QinglanTokens.Update(qinglanToken);
                     await _context.SaveChangesAsync();
                     return new TokenResult

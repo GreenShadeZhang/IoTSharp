@@ -16,5 +16,9 @@ public interface IQinglanApi : IHttpApi
 
     [HttpPost("prod-api/thirdparty/online")]
     Task<object> GetOnlineAsync([JsonContent] List<string> uids);
+
+    [OAuthToken]
+    [HttpGet("prod-api/radar/equipment/list")]
+    Task<RadarDeviceModel> GetRadarDeviceListAsync(int pageNum, int pageSize, string uid, int deptId = 258);
 }
 
