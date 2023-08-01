@@ -13,7 +13,7 @@ export function accountApi() {
 	return {
 		accountList: (params: CustomerQueryParam) => {
 			return request({
-				url: `/api/Account/List`,
+				url: `/api/WeChatUserAccount/List`,
 				method: 'get',
 				params,
 			});

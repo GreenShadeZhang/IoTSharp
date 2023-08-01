@@ -101,6 +101,18 @@ namespace IoTSharp.Contracts
         public OriginatorType OriginatorType { get; set; }
 
         public object Originator { get; set; }
+
+        public int AlarmId { get; set; }
+        public DateTime AlarmTime { get; set; }
+        public string AlarmMsg { get; set; }
+        public string EqtTypeId { get; set; }
+        public string Uid { get; set; }
+        public string EqtName { get; set; }
+        public string ProcessingResult { get; set; }
+        public object ProcessingOpinions { get; set; }
+        public object ProcessingPeople { get; set; }
+        public object ProcessingTime { get; set; }
+        public int DeptId { get; set; }
     }
 
 

@@ -691,6 +691,46 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="T:IoTSharp.Controllers.QinlanAlarmController">
+            <summary>
+            告警管理
+            </summary>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanAlarmController.Occurred(IoTSharp.Contracts.CreateAlarmDto)">
+            <summary>
+            创建告警， 但不触发规则链。要触发规则链， 请使用设备相关的API
+            </summary>
+            <param name="dto">告警内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanAlarmController.List(IoTSharp.Controllers.Models.AlarmParam)">
+            <summary>
+            查询告警信息
+            </summary>
+            <param name="m">指定OriginatorId时需要填写OriginatorType</param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanAlarmController.Originators(IoTSharp.Models.ModelOriginatorSearch)">
+            <summary>
+            搜索告警发起对象
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanAlarmController.AckAlarm(IoTSharp.Contracts.AlarmStatusDto)">
+            <summary>
+            确认告警
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.QinlanAlarmController.ClearAlarm(IoTSharp.Contracts.AlarmStatusDto)">
+            <summary>
+            清除告警信息
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
         <member name="T:IoTSharp.Controllers.QinlanDevicesController">
             <summary>
             设备管理
@@ -983,6 +1023,128 @@
             删除租户，仅限系统用户
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IoTSharp.Controllers.WeChatUserAccountController">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{Microsoft.AspNetCore.Identity.IdentityUser},Microsoft.AspNetCore.Identity.SignInManager{Microsoft.AspNetCore.Identity.IdentityUser},Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{IoTSharp.Controllers.WeChatUserAccountController},IoTSharp.Data.ApplicationDbContext,Microsoft.Extensions.Options.IOptions{IoTSharp.Contracts.AppSettings},Verdure.Qinglan.IQinglanApi)">
+            <summary>
+            用户管理
+            </summary>
+            <param name="userManager"></param>
+            <param name="signInManager"></param>
+            <param name="configuration"></param>
+            <param name="logger"></param>
+            <param name="context"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.Avatar">
+            <summary>
+            获取当前用户的头像， 基于邮箱生成
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.MyInfo">
+            <summary>
+            获取当前登录用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.Login(IoTSharp.Dtos.LoginDto)">
+            <summary>
+            登录用户
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.RefreshToken(IoTSharp.Dtos.RefreshTokenDto)">
+            <summary>
+            刷新JWT Token
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.Logout">
+            <summary>
+            退出账号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.Register(IoTSharp.Dtos.RegisterDto)">
+            <summary>
+            注册用户
+            </summary>
+            <param name="model"></param>
+            <returns >返回登录结果</returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.Create(IoTSharp.Dtos.InstallDto)">
+            <summary>
+            注册新的租户，客户，以及用户
+            </summary>
+            <param name="model"></param>
+            <returns >返回登录结果</returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.CreateUser(IoTSharp.Dtos.CreateUserDto)">
+            <summary>
+            注册新的租户，客户，以及用户
+            </summary>
+            <param name="model"></param>
+            <returns >返回登录结果</returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.PostAccount(IoTSharp.Dtos.CreateUserInput)">
+            <summary>
+            为当前客户所在的租户新增用户  zhangjie 20230308
+            </summary>
+            <param name="model">前端传参</param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.List(IoTSharp.Controllers.Models.UserQueryDto)">
+            <summary>
+            列出指定租户的所有用户。
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.Get(System.String)">
+            <summary>
+            返回用户信息
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.Lock(IoTSharp.Dtos.LockDto)">
+             <summary>
+             锁定用户
+             </summary>
+             <param name="dto"></param>
+             <returns>
+             UserAlreadyExists = 10020,
+             NotFoundUser = 10021,
+             CanNotLockUser = 10022,
+            LockUserHaveError = 10023
+            CanNotLockYourself =10028 
+            CanNotUnlockYourself =10029 
+            </returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.Modify(IoTSharp.Dtos.UserItemDto)">
+            <summary>
+            修改用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.ModifyMyInfo(IoTSharp.Dtos.UserItemDto)">
+            <summary>
+            修改当前用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IoTSharp.Controllers.WeChatUserAccountController.ModifyMyPassword(IoTSharp.Dtos.UserPassword)">
+            <summary>
+            修改当前用户信息
+            </summary>
             <returns></returns>
         </member>
         <member name="P:IoTSharp.Controllers.DeviceAttributeDto.DataSide">

@@ -18,7 +18,7 @@ interface QueryParam extends IListQueryParam {
     originatorType?: string;
 }
 export function getAlarmList(query: QueryParam) {
-    return request.post(`/api/alarm/list`, query)
+    return request.post(`/api/QinlanAlarm/list`, query)
 }
 
 
