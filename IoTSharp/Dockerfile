@@ -32,6 +32,7 @@ WORKDIR /src/ClientApp/
 RUN  npm install  --legacy-peer-deps
 WORKDIR /src
 COPY ["IoTSharp/IoTSharp.csproj", "IoTSharp/"]
+COPY ["BusinessLogic/Verdure.Qinglan/Verdure.Qinglan.csproj", "BusinessLogic/Verdure.Qinglan/"]
 COPY ["IoTSharp.Contracts/IoTSharp.Contracts.csproj", "IoTSharp.Contracts/"]
 COPY ["IoTSharp.Data.Storage/IoTSharp.Data.Cassandra/IoTSharp.Data.Cassandra.csproj", "IoTSharp.Data.Storage/IoTSharp.Data.Cassandra/"]
 COPY ["IoTSharp.Data/IoTSharp.Data.csproj", "IoTSharp.Data/"]
