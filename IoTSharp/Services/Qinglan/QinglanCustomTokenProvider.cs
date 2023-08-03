@@ -75,7 +75,7 @@ namespace IoTSharp.Services
 
                     qinglanToken.AccessToken = token.Data.access_token;
                     qinglanToken.RefreshToken = token.Data.refresh_token;
-                    qinglanToken.CreateDate = DateTime.Now;
+                    qinglanToken.CreateDate = DateTime.UtcNow;
                     qinglanToken.Scope = token.Data.scope;
                     qinglanToken.ExpiresIn = token.Data.expires_in;
                     qinglanToken.TokenType = token.Data.token_type;
@@ -100,7 +100,7 @@ namespace IoTSharp.Services
                     {
                         AccessToken = token.Data.access_token,
                         RefreshToken = token.Data.refresh_token,
-                        CreateDate = DateTime.Now,
+                        CreateDate = DateTime.UtcNow,
                         Scope = token.Data.scope,
                         ExpiresIn = token.Data.expires_in,
                         TokenType = token.Data.token_type
