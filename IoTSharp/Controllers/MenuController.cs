@@ -5,6 +5,7 @@ using IoTSharp.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -68,6 +69,38 @@ namespace IoTSharp.Controllers
                         }
                 }
             };
+            if (User.IsInRole(nameof(UserRole.TenantAdmin)))
+            {
+                _user_menu.Add(
+                    new()
+                    {
+                        text = "用户管理",
+                        i18n = "",
+                        vi18n = "iot.wechatuser",
+                        routename = "devicemnt",
+                        vpath = "/iot/wechatuser",
+                        icon = "anticon-database",
+                        children = new MenuItem[]
+                        {
+                            new() { text = "社区用户列表", i18n = "", vi18n = "iot.customerlist", routename = "customerlist", link = "/iot/settings/customerlist", vpath = "/iot/settings/customerlist", }
+                        }
+                    });
+
+                _user_menu.Add(
+                    new()
+                    {
+                        text = "组织管理",
+                        i18n = "",
+                        vi18n = "iot.wechatuser",
+                        routename = "devicemnt",
+                        vpath = "/iot/wechatuser",
+                        icon = "anticon-database",
+                        children = new MenuItem[]
+                        {
+                            new() { text = "小区管理", i18n = "", vi18n = "iot.customerlist", routename = "customerlist", link = "/iot/settings/customerlist", vpath = "/iot/settings/customerlist", }
+                        }
+                    });
+            }
             if (User.IsInRole(nameof(UserRole.NormalUser)))
             {
                 //_user_menu.Add(
