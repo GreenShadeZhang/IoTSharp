@@ -272,7 +272,9 @@ namespace IoTSharp.Contracts
     public enum DeviceType
     {
         Device = 0,
-        Gateway = 1
+        Gateway = 1,
+        Radar = 2,
+        SmokeAlarm = 3,
     }
 
     [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]

@@ -103,22 +103,22 @@ export const createCustomerListCrudOptions = function ({ expose }, tenantId) {
 							});
 						},
 					},
-					custom: {
-						text: '用户管理',
-						title: '用户管理',
-						icon: 'User',
-						order: 1,
-						type: 'info',
-						...FsButton,
-						click: (e) => {
-							router.push({
-								path: '/iot/settings/userlist',
-								query: {
-									id: e.row.id,
-								},
-							});
-						},
-					},
+					// custom: {
+					// 	text: '用户管理',
+					// 	title: '用户管理',
+					// 	icon: 'User',
+					// 	order: 1,
+					// 	type: 'info',
+					// 	...FsButton,
+					// 	click: (e) => {
+					// 		router.push({
+					// 			path: '/iot/settings/userlist',
+					// 			query: {
+					// 				id: e.row.id,
+					// 			},
+					// 		});
+					// 	},
+					// },
 					edit: {
 						icon: 'EditPen',
 						...FsButton,

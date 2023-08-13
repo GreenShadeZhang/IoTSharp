@@ -188,6 +188,8 @@ export const createDeviceCrudOptions = function ({ expose }, customerId, deviceD
 					search: { show: false },
 					dict: dict({
 						data: [
+							{ value: 'Radar', label: '雷达设备' },
+							{ value: 'SmokeAlarm', label: '烟感报警设备' },
 							{ value: 'Gateway', label: '网关' },
 							{ value: 'Device', label: '设备', color: 'warning' },
 						],

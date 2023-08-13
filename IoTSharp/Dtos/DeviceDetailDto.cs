@@ -47,6 +47,17 @@ namespace IoTSharp.Dtos
         public Guid TenantId { get;  set; }
         public Guid CustomerId { get;  set; }
 
+        /// <summary>
+        /// 设备名称
+        /// </summary>
+        public string EqtName { get; set; }
+
+
+        /// <summary>
+        /// 设备类型名称
+        /// </summary>
+        public string EqtTypeName { get; set; }
+
         public int EqtId { get; set; }
         public string Uid { get; set; }
         public int DeptId { get; set; }
