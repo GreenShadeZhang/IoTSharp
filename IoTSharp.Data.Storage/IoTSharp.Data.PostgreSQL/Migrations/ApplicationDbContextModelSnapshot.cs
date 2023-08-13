@@ -608,6 +608,15 @@ namespace IoTSharp.Migrations
                     b.Property<int>("DeviceType")
                         .HasColumnType("integer");
 
+                    b.Property<long>("EqtId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("EqtName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EqtTypeName")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -622,6 +631,9 @@ namespace IoTSharp.Migrations
 
                     b.Property<int>("Timeout")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Uid")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
