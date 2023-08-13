@@ -146,11 +146,11 @@ namespace IoTSharp.Controllers
                         i18n = "",
                         vi18n = "iot.alarmmnt",
                         routename = "alarmmnt",
-                        vpath = "/iot/alarms",
+                        vpath = "/iot/radaralarms",
                         icon = "anticon-database",
                         children = new MenuItem[]
                         {
-                            new() { text = "雷达设备告警", i18n = "", vi18n="iot.alarmlist", routename="alarmlist", link = "/iot/alarms/alarmlist", vpath = "/iot/alarms/alarmlist", }
+                            new() { text = "雷达设备告警", i18n = "", vi18n="iot.radaralarmlist", routename="radaralarmlist", link = "/iot/radaralarms/radaralarmlist", vpath = "/iot/radaralarms/radaralarmlist", }
                         }
                     });
                 //_user_menu.Add(
