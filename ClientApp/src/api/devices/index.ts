@@ -13,8 +13,40 @@ import request from '/@/utils/request';
  */
 export function deviceApi() {
 	return {
-		devcieList: (params: QueryParam) => {
+		radardevcieList: (params: QueryParam) => {
 			var url = '/api/QinlanDevices/Customers?offset=' + params.offset + '&limit=' + params.limit + '&sorter=&customerId=' + params.customerId + '&sort=';
+			if (params.name) {
+				url += '&name=' + params.name;
+			}
+			if (params.onlyActive) {
+				url += '&onlyActive=' + params.onlyActive;
+			}
+
+			return request({
+				url: url,
+				method: 'get',
+				data: params,
+			});
+
+			// return request({
+			// 	url:
+			// 		'/api/Devices/Customers?offset=' +
+			// 		params.offset +
+			// 		'&limit=' +
+			// 		params.limit +
+			// 		'&sorter=&onlyActive=' +
+			// 		params.onlyActive +
+			// 		'&customerId=' +
+			// 		params.customerId +
+			// 		'&name=' +
+			// 		params.name +
+			// 		'&sort=',
+			// 	method: 'get',
+			// 	data: params,
+			// });
+		},
+		devcieList: (params: QueryParam) => {
+			var url = '/api/Devices/Customers?offset=' + params.offset + '&limit=' + params.limit + '&sorter=&customerId=' + params.customerId + '&sort=';
 			if (params.name) {
 				url += '&name=' + params.name;
 			}

@@ -67,6 +67,15 @@ export const frontEndRoutes = [
 		},
 	},
 	{
+		path: '/iot/devices/devicelist',
+		name: 'devicelist',
+		component: () => import('/@/views/iot/devices/devicelist.vue'),
+		meta: {
+			title: '设备列表',
+			isHide: true,
+		},
+	},
+	{
 		path: '/iot/rules/flowdesigner',
 		name: 'flowdesigner',
 		component: () => import('/@/views/iot/rules/flowdesigner.vue'),

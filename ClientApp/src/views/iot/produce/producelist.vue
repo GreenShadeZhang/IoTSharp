@@ -262,7 +262,7 @@ const creatdevice = (row: TableDataRow) => {
 };
 const navtodevice = (row: TableDataRow) => {
   router.push({
-    path: "/iot/devices/devicelist",
+    path: "/iot/devices/radardevicelist",
   });
 };
 const deleteprod = async (row: TableDataRow) => {

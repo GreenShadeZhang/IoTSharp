@@ -5,7 +5,7 @@
         <fs-crud ref="crudRef" v-bind="crudBinding">
           <template #actionbar-right>
             <el-divider direction="vertical"/>
-            <el-button @click="openCustomForm">规则181委托</el-button>
+            <el-button @click="openCustomForm">规则</el-button>
           </template>
         </fs-crud>
       </div>
@@ -21,7 +21,7 @@ import { useCrud } from '@fast-crud/fast-crud';
 import { useExpose } from '@fast-crud/fast-crud';
 import DeviceDetail from './DeviceDetail.vue';
 import addRules from './addRules.vue';
-import { createDeviceCrudOptions } from '/@/views/iot/devices/deviceCrudOptions';
+import { createRadarDeviceCrudOptions } from '/@/views/iot/devices/radarDeviceCrudOptions';
 import { useRoute } from 'vue-router';
 import { useUserInfo } from '/@/stores/userInfo';
 import { storeToRefs } from 'pinia';
@@ -43,7 +43,7 @@ const addRulesRef = ref();
 // 暴露的方法
 const { crudExpose } = useExpose({ crudRef, crudBinding });
 // 你的crud配置
-const { crudOptions } = createDeviceCrudOptions({ expose: crudExpose }, customerId, deviceDetailRef, addRulesRef, selectedItems);
+const { crudOptions } = createRadarDeviceCrudOptions({ expose: crudExpose }, customerId, deviceDetailRef, addRulesRef, selectedItems);
 // 初始化crud配置
 // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
 const { resetCrudOptions } = useCrud({ expose: crudExpose, crudOptions });

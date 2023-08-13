@@ -91,13 +91,13 @@ namespace IoTSharp.Controllers
                     {
                         text = "组织管理",
                         i18n = "",
-                        vi18n = "iot.wechatuser",
+                        vi18n = "iot.streets",
                         routename = "devicemnt",
-                        vpath = "/iot/wechatuser",
+                        vpath = "/iot/streets",
                         icon = "anticon-database",
                         children = new MenuItem[]
                         {
-                            new() { text = "小区管理", i18n = "", vi18n = "iot.customerlist", routename = "customerlist", link = "/iot/settings/customerlist", vpath = "/iot/settings/customerlist", }
+                            new() { text = "小区管理", i18n = "", vi18n = "iot.streetlist", routename = "streetlist", link = "/iot/streets/streetlist", vpath = "/iot/streets/streetlist", }
                         }
                     });
             }

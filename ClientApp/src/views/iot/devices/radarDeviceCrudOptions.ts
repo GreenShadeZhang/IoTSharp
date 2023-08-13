@@ -5,7 +5,7 @@ import { TableDataRow } from '/@/views/iot/devices/model';
 import dayjs from 'dayjs';
 
 // eslint-disable-next-line no-unused-vars
-export const createDeviceCrudOptions = function ({ expose }, customerId, deviceDetailRef?, addRulesRef?, selectedItems?) {
+export const createRadarDeviceCrudOptions = function ({ expose }, customerId, deviceDetailRef?, addRulesRef?, selectedItems?) {
 
 
 
@@ -30,7 +30,7 @@ export const createDeviceCrudOptions = function ({ expose }, customerId, deviceD
 			name: query.form.name ?? '',
 		});
 
-		const res = await deviceApi().devcieList(params);
+		const res = await deviceApi().radardevcieList(params);
 		records = res.data.rows;
 		return {
 			records,
