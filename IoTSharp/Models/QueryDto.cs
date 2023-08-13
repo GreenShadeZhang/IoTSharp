@@ -77,6 +77,18 @@ namespace IoTSharp.Controllers.Models
     {
         public string KeyName { get; set; }
     }
+
+    /// <summary>
+    /// 租户的街道小区查询
+    /// </summary>
+    public class StreetParam : QueryDto
+    {
+        /// <summary>
+        /// 租户ID
+        /// </summary>
+        public Guid tenantId { get; set; }
+    }
+
     /// <summary>
     /// 租户的客户查询
     /// </summary>

@@ -45,6 +45,7 @@ namespace IoTSharp.Data
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Relationship> Relationship { get; set; }
         public DbSet<Device> Device { get; set; }
+        public DbSet<Street> Street { get; set; }
         public DbSet<Gateway> Gateway { get; set; }
         public DbSet<TelemetryData> TelemetryData { get; set; }
         public DbSet<AttributeLatest> AttributeLatest { get; set; }

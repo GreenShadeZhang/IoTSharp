@@ -1,13 +1,20 @@
 // 定义接口来定义对象的类型
 export interface TableDataRow {
-	accessFailedCount?: number;
-	email?: string;
 	id?: string;
-	lockoutEnabled?: boolean;
-	lockoutEnd?: string;
-	phoneNumber?: string;
-	roles?: string[];
-	userName?: string;
+	provinceCode?: number;
+	provinceName?: string;
+	cityCode?: number;
+	cityName?: string;
+	districtCode?: number;
+	districtName?: string;
+	neighName?: string;
+	addressDetail?: string;
+	manager?: string;
+	managerPhone?: string;
+	managerEmail?: string;
+	peopleNum?: number;
+	olderNum?: number;
+	remark: string;
 }
 
 export interface TableDataState {

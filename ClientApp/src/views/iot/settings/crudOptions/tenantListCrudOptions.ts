@@ -112,7 +112,7 @@ export const createTenantListCrudOptions = function ({ expose }) {
 			},
 			columns: {
 				name: {
-					title: '名称',
+					title: '社区街道名称',
 					type: 'text',
 					column: { width: 200 },
 					search: { show: true },

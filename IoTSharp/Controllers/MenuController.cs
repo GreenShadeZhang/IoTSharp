@@ -41,7 +41,7 @@ namespace IoTSharp.Controllers
             if (User.IsInRole(nameof(UserRole.SystemAdmin)))
             {
                 //sysmenu.Add(new() { text = "证书管理", i18n = "", vi18n = "iot.certmnt", routename = "certmnt", link = "/iot/settings/certmgr", vpath = "/iot/settings/certmgr", });
-                sysmenu.Add(new() { text = "租户列表", i18n = "", vi18n = "iot.tenantlist", routename = "tenantlist", link = "/iot/settings/tenantlist", vpath = "/iot/settings/tenantlist" });
+                sysmenu.Add(new() { text = "街道社区列表", i18n = "", vi18n = "iot.tenantlist", routename = "tenantlist", link = "/iot/settings/tenantlist", vpath = "/iot/settings/tenantlist" });
             }
             //if (User.IsInRole(nameof(UserRole.TenantAdmin)))
             //{
@@ -101,6 +101,24 @@ namespace IoTSharp.Controllers
                         }
                     });
             }
+
+            if (User.IsInRole(nameof(UserRole.SystemAdmin)))
+            {
+                _user_menu.Add(
+                    new()
+                    {
+                        text = "设备管理",
+                        i18n = "",
+                        vi18n = "iot.devicemnt",
+                        routename = "devicemnt",
+                        vpath = "/iot/devices",
+                        icon = "anticon-database",
+                        children = new MenuItem[]
+                        {
+                            new() { text = "雷达设备", i18n = "", vi18n="iot.radardevicelist", routename="radardevicelist", link = "/iot/devices/radardevicelist" , vpath="/iot/devices/radardevicelist",}
+                        }
+                    });
+            }
             if (User.IsInRole(nameof(UserRole.NormalUser)))
             {
                 //_user_menu.Add(
@@ -122,20 +140,6 @@ namespace IoTSharp.Controllers
                 //        }
                 //    });
                 _user_menu.Add(
-                new()
-                {
-                    text = "设备管理",
-                    i18n = "",
-                    vi18n = "iot.devicemnt",
-                    routename = "devicemnt",
-                    vpath = "/iot/devices",
-                    icon = "anticon-database",
-                    children = new MenuItem[]
-                        {
-                            new() { text = "雷达设备", i18n = "", vi18n="iot.radardevicelist", routename="radardevicelist", link = "/iot/devices/radardevicelist" , vpath="/iot/devices/radardevicelist",}
-                        }
-                });
-                _user_menu.Add(
                     new()
                     {
                         text = "设备告警",
@@ -149,7 +153,6 @@ namespace IoTSharp.Controllers
                             new() { text = "雷达设备告警", i18n = "", vi18n="iot.alarmlist", routename="alarmlist", link = "/iot/alarms/alarmlist", vpath = "/iot/alarms/alarmlist", }
                         }
                     });
-
                 //_user_menu.Add(
                 //    new()
                 //    {

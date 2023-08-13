@@ -1,4 +1,4 @@
-import { accountApi } from '/@/api/user';
+import { streetApi } from '/@/api/streets';
 import _ from 'lodash-es';
 import { TableDataRow } from '../model/streetListModel';
 import { ElMessage } from 'element-plus';
@@ -18,12 +18,25 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
         inactiveColor: 'var(el-switch-of-color)',
     };
     const pageRequest = async (query) => {
+
+        const params = reactive({
+			offset: query.page.currentPage - 1,
+			limit: query.page.pageSize,
+			customerId,
+			neighName: query.form.neighName ?? '',
+            manager: query.form.manager ?? '',
+            managerPhone: query.form.managerPhone ?? '',
+		});
+
         let {
             form: { userName: name },
             page: { currentPage: currentPage, pageSize: limit },
         } = query;
+
         let offset = currentPage === 1 ? 0 : currentPage - 1;
-        const res = await accountApi().accountList({ name, limit, offset, customerId });
+        //const res = await streetApi().streetList({ name, limit, offset, customerId ,neighName: query.form.neighName ?? '',});
+
+        const res = await streetApi().streetList(params);
         return {
             records: res.data.rows,
             currentPage: currentPage,
@@ -34,7 +47,7 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
     const editRequest = async ({ form, row }) => {
         form.id = row.id;
         try {
-            await accountApi().putAccount(form);
+            await streetApi().putStreet(form);
             return form;
         } catch (e) {
             ElMessage.error(e.response.msg);
@@ -42,7 +55,7 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
     };
     const delRequest = async ({ row }) => {
         try {
-            await accountApi().deleteAccount(row.id);
+            await streetApi().deleteStreet(row.id);
             _.remove(records, (item: TableDataRow) => {
                 return item.id === row.id;
             });
@@ -59,7 +72,7 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                 if (email) {
                     const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
                     if (regEmail.test(email)) {
-                        await accountApi().postAccount({
+                        await streetApi().postStreet({
                             ...form,
                             customerId,
                         });
@@ -149,26 +162,27 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                 },
             },
             columns: {
-                tenantName: {
-                    title: '所属租户',
+                neighName: {
+                    title: '小区名称',
                     type: 'text',
                     column: { width: 140 },
+                    search: { show: true }, //显示查询
                     addForm: {
-                        show: false,
+                        show: true,
                     },
                     editForm: {
-                        show: false,
+                        show: true,
                     },
                 },
-                customerName: {
-                    title: '所属客户',
+                addressDetail: {
+                    title: '小区地址',
                     type: 'text',
-                    column: { width: 140 },
+                    column: { width: 200 },
                     addForm: {
-                        show: false,
+                        show: true,
                     },
                     editForm: {
-                        show: false,
+                        show: true,
                     },
                 },
                 //id: {
@@ -182,23 +196,22 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                 //		show: false,
                 //	},
                 //},
-                userName: {
-                    title: '名称',
+                manager: {
+                    title: '负责人',
                     type: 'text',
-                    column: { width: 200 },
+                    column: { width: 140 },
                     search: { show: true }, //显示查询
                     addForm: {
-                        show: true,
-                        component: requiredCustomSwitchComponent,
+                        show: true
                     },
                     editForm: {
-                        show: true,
-                        component: requiredCustomSwitchComponent,
+                        show: true
                     },
                 },
-                email: {
-                    title: '邮件',
-                    column: { width: 200 },
+                managerPhone: {
+                    title: '负责人电话号码',
+                    column: { width: 140 },
+                    search: { show: true }, //显示查询
                     type: 'text',
                     addForm: {
                         show: true,
@@ -209,64 +222,36 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                         component: requiredCustomSwitchComponent,
                     },
                 },
-                phoneNumber: {
-                    title: '电话',
+                peopleNum: {
+                    title: '小区人数',
                     column: { width: 140 },
                     type: 'text',
                     addForm: {
                         show: true,
-                        component: customSwitchComponent,
                     },
                     editForm: {
                         show: true,
-                        component: customSwitchComponent,
                     },
                 },
-                accessFailedCount: {
-                    title: '登录失败次数',
-                    column: { width: 135 },
+                olderNum: {
+                    title: '康养老人数',
+                    column: { width: 140 },
+                    addForm: {
+                        show: true,
+                    },
+                    editForm: {
+                        show: true,
+                    },
+                },
+                remark: {
+                    title: '简介',
+                    column: { width: 140 },
                     type: 'text',
                     addForm: {
-                        show: false,
+                        show: true,
                     },
                     editForm: {
-                        show: false,
-                    },
-                },
-                lockoutEnabled: {
-                    title: '锁定',
-                    addForm: {
-                        show: false,
-                    },
-                    column: {
-                        width: 100,
-                        component: {
-                            name: 'fs-dict-switch',
-                            show: true,
-                            onChange: compute((context) => {
-                                return async () => {
-                                    const { id: Id, lockoutEnabled } = context.row;
-                                    await accountApi().updateAccountStatus({
-                                        Id,
-                                        opt: lockoutEnabled ? 'Lock' : 'Unlock',
-                                    });
-                                };
-                            }),
-                        },
-                    },
-                    editForm: {
-                        show: false,
-                    },
-                },
-                lockoutEnd: {
-                    addForm: {
-                        show: false,
-                    },
-                    title: '锁定截止时间',
-                    //column: { width: 150 },
-                    type: 'text',
-                    editForm: {
-                        show: false,
+                        show: true,
                     },
                 },
             },
