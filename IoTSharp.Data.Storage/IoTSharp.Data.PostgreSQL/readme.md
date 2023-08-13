@@ -5,3 +5,9 @@ Script-Migration 20230731134232_QinglanToken -context IoTSharp.Data.ApplicationD
 Add-Migration UpdateDevice -context IoTSharp.Data.ApplicationDbContext
 
 Update-Database UpdateDevice -context IoTSharp.Data.ApplicationDbContext
+
+
+
+Add-Migration AddStreet -context IoTSharp.Data.ApplicationDbContext
+
+Update-Database AddStreet -context IoTSharp.Data.ApplicationDbContext

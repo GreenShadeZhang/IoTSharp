@@ -1787,6 +1787,75 @@ namespace IoTSharp.Migrations
                     b.ToTable("RuleTaskExecutors");
                 });
 
+            modelBuilder.Entity("IoTSharp.Data.Street", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AddressDetail")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CityCode")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CityName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreateUserId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("CustomerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("DistrictCode")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("DistrictName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Manager")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ManagerEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ManagerPhone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NeighName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("OlderNum")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PeopleNum")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProvinceCode")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ProvinceName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Street");
+                });
+
             modelBuilder.Entity("IoTSharp.Data.SubscriptionEvent", b =>
                 {
                     b.Property<Guid>("EventId")
@@ -2582,6 +2651,21 @@ namespace IoTSharp.Migrations
                 });
 
             modelBuilder.Entity("IoTSharp.Data.RuleTaskExecutor", b =>
+                {
+                    b.HasOne("IoTSharp.Data.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("IoTSharp.Data.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("IoTSharp.Data.Street", b =>
                 {
                     b.HasOne("IoTSharp.Data.Customer", "Customer")
                         .WithMany()
