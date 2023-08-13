@@ -52,6 +52,7 @@ namespace IoTSharp.Controllers
         /// <returns></returns>
         [HttpPost("Tenant")]
         [Authorize(Roles = nameof(UserRole.TenantAdmin))]
+        [Authorize(Roles = nameof(UserRole.SystemAdmin))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResult), StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -60,9 +61,18 @@ namespace IoTSharp.Controllers
             var profile = this.GetUserProfile();
             if (m.tenantId != Guid.Empty)
             {
-                var querym = _context.Street.Include(c => c.Tenant).Where(c => !c.Deleted && c.Tenant.Id == m.tenantId);
-                var data = await m.Query(querym, c => c.NeighName);
-                return new ApiResult<PagedData<Street>>(ApiCode.Success, "OK", data);
+                if (User.IsInRole(nameof(UserRole.SystemAdmin)))
+                {
+                    var querym = _context.Street.Include(c => c.Tenant).Where(c => !c.Deleted);
+                    var data = await m.Query(querym, c => c.NeighName);
+                    return new ApiResult<PagedData<Street>>(ApiCode.Success, "OK", data);
+                }
+                else
+                {
+                    var querym = _context.Street.Include(c => c.Tenant).Where(c => !c.Deleted && c.Tenant.Id == m.tenantId);
+                    var data = await m.Query(querym, c => c.NeighName);
+                    return new ApiResult<PagedData<Street>>(ApiCode.Success, "OK", data);
+                }
             }
             else
             {

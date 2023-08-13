@@ -13,7 +13,7 @@ export function streetApi() {
 	return {
 		streetList: (params: CustomerQueryParam) => {
 			return request({
-				url: `/api/Streets`,
+				url: `/api/Streets/Tenant`,
 				method: 'post',
 				data: params,
 			});
@@ -35,7 +35,7 @@ export function streetApi() {
 
 		putStreet: (data: any) => {
 			return request({
-				url: '/api/Streets'+ data.id,
+				url: '/api/Streets/'+ data.id,
 				method: 'put',
 				data: data,
 			});

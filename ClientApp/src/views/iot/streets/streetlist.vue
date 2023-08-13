@@ -20,7 +20,8 @@ const crudRef = ref();
 const crudBinding = ref();
 const { crudExpose } = useExpose({ crudRef, crudBinding });
 const customerId = route.query.id || userInfos.value.customer.id;
-const { crudOptions } = createStreetListCrudOptions({ expose: crudExpose }, customerId);
+const tenantId = route.query.id || userInfos.value.tenant.id;
+const { crudOptions } = createStreetListCrudOptions({ expose: crudExpose }, customerId,tenantId);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
 useCrud({ crudExpose, crudOptions });
 onMounted(() => {

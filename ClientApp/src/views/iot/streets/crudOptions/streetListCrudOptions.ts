@@ -3,7 +3,7 @@ import _ from 'lodash-es';
 import { TableDataRow } from '../model/streetListModel';
 import { ElMessage } from 'element-plus';
 import { compute } from '@fast-crud/fast-crud';
-export const createStreetListCrudOptions = function ({ expose }, customerId) {
+export const createStreetListCrudOptions = function ({ expose }, customerId,tenantId) {
     let records: any[] = [];
     const FsButton = {
         link: true,
@@ -23,6 +23,7 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
 			offset: query.page.currentPage - 1,
 			limit: query.page.pageSize,
 			customerId,
+            tenantId,
 			neighName: query.form.neighName ?? '',
             manager: query.form.manager ?? '',
             managerPhone: query.form.managerPhone ?? '',
@@ -66,26 +67,32 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
     const addRequest = async ({ form }) => {
         try {
             //验证
-            var userName = form.userName;
-            var email = form.email;
-            if (userName) {
-                if (email) {
-                    const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
-                    if (regEmail.test(email)) {
-                        await streetApi().postStreet({
-                            ...form,
-                            customerId,
-                        });
-                        records.push(form);
-                        return form;
-                    } else {
-                        ElMessage.error('请输入合法邮箱');
-                    }
+            var neighName = form.neighName;
+            var managerEmail = form.managerEmail;
+            if (neighName) {
+                if (managerEmail) {
+                    await streetApi().postStreet({
+                        ...form,
+                        customerId,
+                    });
+                    records.push(form);
+                    return form;
+                    // const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+                    // if (regEmail.test(managerEmail)) {
+                    //     await streetApi().postStreet({
+                    //         ...form,
+                    //         customerId,
+                    //     });
+                    //     records.push(form);
+                    //     return form;
+                    // } else {
+                    //     ElMessage.error('请输入合法邮箱');
+                    // }
                 } else {
                     ElMessage.error('请填写邮箱');
                 }
             } else {
-                ElMessage.error('请填写用户名');
+                ElMessage.error('请填写小区名称');
             }
         } catch (e) {
             ElMessage.error(e.response.msg);
@@ -115,25 +122,25 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                     var form = subParam.form;
                     if (subParam.mode == 'add') {
                         //验证
-                        var userName = form.userName;
-                        var email = form.email;
-                        if (userName) {
-                            if (email) {
+                        var neighName = form.neighName;
+                        var managerEmail = form.managerEmail;
+                        if (neighName) {
+                            if (managerEmail) {
                                 const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
-                                if (regEmail.test(email)) {
+                                if (regEmail.test(managerEmail)) {
                                    //需要验证是否重复
 
                                 } else {
-                                    ElMessage.error('请输入合法邮箱');
-                                    throw new Error('请输入合法邮箱');
+                                    //ElMessage.error('请输入合法邮箱');
+                                    //throw new Error('请输入合法邮箱');
                                 }
                             } else {
                                 ElMessage.error('请填写邮箱');
                                 throw new Error('请填写邮箱');
                             }
                         } else {
-                            ElMessage.error('请填写用户名');
-                            throw new Error('请填写用户名');
+                            ElMessage.error('请填写小区名');
+                            throw new Error('请填写小区名');
                         }
                     }
                 }
@@ -177,7 +184,7 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                 addressDetail: {
                     title: '小区地址',
                     type: 'text',
-                    column: { width: 200 },
+                    column: { width: 240 },
                     addForm: {
                         show: true,
                     },
@@ -199,7 +206,7 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                 manager: {
                     title: '负责人',
                     type: 'text',
-                    column: { width: 140 },
+                    column: { width: 100 },
                     search: { show: true }, //显示查询
                     addForm: {
                         show: true
@@ -222,9 +229,22 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                         component: requiredCustomSwitchComponent,
                     },
                 },
+                managerEmail: {
+                    title: '负责人邮箱',
+                    column: { width: 200 },
+                    type: 'text',
+                    addForm: {
+                        show: true,
+                        component: requiredCustomSwitchComponent,
+                    },
+                    editForm: {
+                        show: true,
+                        component: requiredCustomSwitchComponent,
+                    },
+                },
                 peopleNum: {
                     title: '小区人数',
-                    column: { width: 140 },
+                    column: { width: 100 },
                     type: 'text',
                     addForm: {
                         show: true,
@@ -235,7 +255,7 @@ export const createStreetListCrudOptions = function ({ expose }, customerId) {
                 },
                 olderNum: {
                     title: '康养老人数',
-                    column: { width: 140 },
+                    column: { width: 100 },
                     addForm: {
                         show: true,
                     },
